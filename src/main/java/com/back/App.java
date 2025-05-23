@@ -62,7 +62,11 @@ public class App {
 
     // 명언 삭제
     public void deleteWiseSaying(int deleteId) {
-        wiseSayingArrayList.removeIf(wiseSaying -> wiseSaying.getId() == deleteId);
-        System.out.println("%d번 명언이 삭제되었습니다.".formatted(deleteId));
+        boolean removed = wiseSayingArrayList.removeIf(wiseSaying -> wiseSaying.getId() == deleteId);
+        if (removed) {
+            System.out.println("%d번 명언이 삭제되었습니다.".formatted(deleteId));
+        } else {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(deleteId));
+        }
     }
 }
