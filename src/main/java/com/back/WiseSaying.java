@@ -11,6 +11,10 @@ public class WiseSaying {
         this.author = author;
     }
 
+    public int getId() {
+        return id;
+    }
+
     @Override
     public String toString() {
         return "%d / %s / %s".formatted(id, content, author);
