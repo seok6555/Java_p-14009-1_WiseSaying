@@ -22,6 +22,9 @@ public class App {
                 createWiseSaying();
             } else if (cmd.equals("목록")) {
                 readWiseSaying();
+            } else if (cmd.startsWith("수정?id=")) {
+                int updateId = Integer.parseInt(cmd.substring(6));
+                updateWiseSaying(updateId);
             } else if (cmd.startsWith("삭제?id=")) {
                 int deleteId = Integer.parseInt(cmd.substring(6));
                 deleteWiseSaying(deleteId);
@@ -56,8 +59,28 @@ public class App {
     }
 
     // 명언 수정
-    public void updateWiseSaying() {
+    public void updateWiseSaying(int updateId) {
+        boolean foundId = false;
 
+        for (WiseSaying wiseSaying : wiseSayingArrayList) {
+            if (wiseSaying.getId() == updateId) {
+                System.out.println("명언(기존) : %s".formatted(wiseSaying.getContent()));
+                System.out.print("명언 : ");
+                String newContent = scanner.nextLine();
+                wiseSaying.setContent(newContent);
+
+                System.out.println("작가(기존) : %s".formatted(wiseSaying.getAuthor()));
+                System.out.print("작가 : ");
+                String newAuthor = scanner.nextLine();
+                wiseSaying.setAuthor(newAuthor);
+                foundId = true;
+                break;
+            }
+        }
+
+        if (!foundId) {
+            System.out.println("%d번 명언은 존재하지 않습니다.".formatted(updateId));
+        }
     }
 
     // 명언 삭제
